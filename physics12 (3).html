@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>فیزیا پۆلی ١٢ - لەگەڵ ئەژی</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --yellow: #FFB800;
+      --yellow-light: #FFD060;
+      --yellow-pale: #FFF5D6;
+      --navy: #1B2A4A;
+      --navy-light: #253860;
+      --navy-dark: #111C30;
+      --white: #FFFFFF;
+      --text-muted: #6B7A99;
+      --card-shadow: 0 4px 24px rgba(27,42,74,0.10);
+      --radius: 18px;
+      --radius-sm: 10px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Noto Sans Arabic', 'Noto Naskh Arabic', sans-serif;
+      background: var(--yellow-pale);
+      color: var(--navy);
+      line-height: 1.7;
+      min-height: 100vh;
+      direction: rtl;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(27,42,74,0.18);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-atom {
+      width: 36px;
+      height: 36px;
+    }
+
+    .nav-logo-text {
+      color: var(--yellow);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 8px;
+      transition: background 0.18s, color 0.18s;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,184,0,0.15);
+      color: var(--yellow);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--yellow);
+      padding: 80px 24px 72px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 50%, rgba(27,42,74,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(27,42,74,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-icon {
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 6vw, 3.6rem);
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-sub {
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      font-weight: 600;
+      color: var(--navy-light);
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-desc {
+      max-width: 520px;
+      margin: 0 auto 40px;
+      font-size: 1rem;
+      color: var(--navy);
+      opacity: 0.75;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--navy);
+      color: var(--yellow);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 50px;
+      transition: transform 0.18s, box-shadow 0.18s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(27,42,74,0.28);
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--navy);
+      padding: 28px 24px;
+    }
+
+    .stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--yellow);
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 4px;
+      font-weight: 400;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 72px 24px;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--navy);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 50px;
+      margin-bottom: 14px;
+      letter-spacing: 0.03em;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.97rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ── PDF GRID ── */
+    #pdfs {
+      background: var(--white);
+    }
+
+    .pdf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .pdf-card {
+      background: var(--yellow-pale);
+      border: 2px solid transparent;
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      cursor: pointer;
+    }
+
+    .pdf-card:hover {
+      border-color: var(--yellow);
+      transform: translateY(-3px);
+      box-shadow: var(--card-shadow);
+    }
+
+    .pdf-card-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--navy);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .pdf-card-icon svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .pdf-card-chapter {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--yellow);
+      background: var(--navy);
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 50px;
+      width: fit-content;
+    }
+
+    .pdf-card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.4;
+    }
+
+    .pdf-card-meta {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .pdf-card-action {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .pdf-card-action svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ── TOPICS ── */
+    #topics {
+      background: var(--yellow-pale);
+    }
+
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .topic-card {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 22px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.18s;
+    }
+
+    .topic-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .topic-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--yellow);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .topic-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    #about .section-title {
+      color: var(--white);
+    }
+
+    #about .section-desc {
+      color: rgba(255,255,255,0.65);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-top: 48px;
+    }
+
+    @media (max-width: 680px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    .about-text p {
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 16px;
+      font-size: 0.97rem;
+    }
+
+    .about-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .highlight-item {
+      background: rgba(255,184,0,0.1);
+      border: 1px solid rgba(255,184,0,0.25);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .highlight-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--yellow);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .highlight-text {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.82);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-dark);
+      padding: 36px 24px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      text-decoration: none;
+    }
+
+    .footer-text {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+    }
+
+    .footer-text span {
+      color: var(--yellow);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .stats-inner { gap: 28px; }
+      .hero { padding: 56px 20px 52px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg class="nav-logo-atom" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="20" cy="20" rx="18" ry="7" stroke="#FFB800" stroke-width="2" fill="none"/>
+        <ellipse cx="20" cy="20" rx="18" ry="7" stroke="#FFB800" stroke-width="2" fill="none" transform="rotate(60 20 20)"/>
+        <ellipse cx="20" cy="20" rx="18" ry="7" stroke="#FFB800" stroke-width="2" fill="none" transform="rotate(120 20 20)"/>
+        <circle cx="20" cy="20" r="3.5" fill="#FFB800"/>
+      </svg>
+      <span class="nav-logo-text">فیزیا پۆلی ١٢</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#pdfs">PDF ەکان</a></li>
+      <li><a href="#topics">بابەتەکان</a></li>
+      <li><a href="#about">دەربارە</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-icon">
+    <svg viewBox="0 0 130 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Head silhouette -->
+      <path d="M65 12 C38 12 22 30 22 52 C22 68 30 80 42 87 L42 100 C42 104 45 106 48 106 L82 106 C85 106 88 104 88 100 L88 87 C100 80 108 68 108 52 C108 30 92 12 65 12Z" fill="#1B2A4A"/>
+      <!-- Hair detail -->
+      <path d="M40 38 C38 28 45 16 58 12 C50 18 44 28 43 38Z" fill="#253860"/>
+      <path d="M90 38 C92 28 85 16 72 12 C80 18 86 28 87 38Z" fill="#253860"/>
+      <!-- Atom overlay -->
+      <ellipse cx="65" cy="55" rx="28" ry="11" stroke="#FFB800" stroke-width="3" fill="none"/>
+      <ellipse cx="65" cy="55" rx="28" ry="11" stroke="#FFB800" stroke-width="3" fill="none" transform="rotate(60 65 55)"/>
+      <ellipse cx="65" cy="55" rx="28" ry="11" stroke="#FFB800" stroke-width="3" fill="none" transform="rotate(120 65 55)"/>
+      <circle cx="65" cy="55" r="6" fill="#FFB800"/>
+    </svg>
+  </div>
+
+  <h1 class="hero-title">فیزیا پۆلی ١٢</h1>
+  <p class="hero-sub">لەگەڵ ئەژی</p>
+  <p class="hero-desc">هەموو تێکستبووکەکان، تێبینیەکان، و تاقیکردنەوەکانی پۆلی دوازدە لێرەدا بەدەستدێن.</p>
+  <a href="#pdfs" class="hero-cta">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/>
+    </svg>
+    PDF ەکان بخوێنەوە
+  </a>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-number" id="counter-chapters">٠</span>
+      <span class="stat-label">بابەت</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" id="counter-pdfs">٠</span>
+      <span class="stat-label">فایلی PDF</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" id="counter-free">بەخۆرایی</span>
+      <span class="stat-label">داگرتن</span>
+    </div>
+  </div>
+</div>
+
+<!-- PDF SECTION -->
+<section id="pdfs">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">فایلەکان</span>
+      <h2 class="section-title">PDF ەکانی دەرسەکان</h2>
+      <p class="section-desc">کلیک بکە و بیخوێنەوە یان داگر بکە.</p>
+    </div>
+
+    <div class="pdf-grid">
+
+      <!-- CARD 1 -->
+      <a href="سەرجەم_pdfـەکان_بەشی_یەک.pdf" target="_blank" class="pdf-card reveal">
+        <div class="pdf-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFB800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+        </div>
+        <span class="pdf-card-chapter">بەشی ١</span>
+        <div class="pdf-card-title">مۆمێنتی هێز و ئارام</div>
+        <div class="pdf-card-meta">تێبینی + نموونەکان</div>
+        <div class="pdf-card-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          بخوێنەوە / داگر بکە
+        </div>
+      </a>
+
+      <!-- CARD 2 -->
+      <a href="سەرجەم_pdfـەکان_بەشی_دووەم.pdf" target="_blank" class="pdf-card reveal">
+        <div class="pdf-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFB800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+        </div>
+        <span class="pdf-card-chapter">بەشی ٢</span>
+        <div class="pdf-card-title">تووندی و بزووتنەوەی ئامیرانە</div>
+        <div class="pdf-card-meta">تێبینی + نموونەکان</div>
+        <div class="pdf-card-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          بخوێنەوە / داگر بکە
+        </div>
+      </a>
+
+      <!-- CARD 3 -->
+      <a href="سەرجەم_pdfـەکان_بەشی_سێیەم.pdf" target="_blank" class="pdf-card reveal">
+        <div class="pdf-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFB800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+        </div>
+        <span class="pdf-card-chapter">بەشی ٣</span>
+        <div class="pdf-card-title">کاری مێکانیکی و وزەی توانا</div>
+        <div class="pdf-card-meta">تێبینی + نموونەکان</div>
+        <div class="pdf-card-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          بخوێنەوە / داگر بکە
+        </div>
+      </a>
+
+      <!-- CARD 4 -->
+      <a href="سەرجەم_pdfـەکان_بەشی_چوارەم.pdf" target="_blank" class="pdf-card reveal">
+        <div class="pdf-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFB800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+        </div>
+        <span class="pdf-card-chapter">بەشی ٤</span>
+        <div class="pdf-card-title">پتەوبوون و پتەو نەبوون</div>
+        <div class="pdf-card-meta">تێبینی + نموونەکان</div>
+        <div class="pdf-card-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          بخوێنەوە / داگر بکە
+        </div>
+      </a>
+
+      <!-- CARD 5 -->
+      <a href="سەرجەم_pdfـەکان_بەشی_پێنجەم.pdf" target="_blank" class="pdf-card reveal">
+        <div class="pdf-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFB800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+        </div>
+        <span class="pdf-card-chapter">بەشی ٥</span>
+        <div class="pdf-card-title">کارەبا و میدانی کارەبایی</div>
+        <div class="pdf-card-meta">تێبینی + نموونەکان</div>
+        <div class="pdf-card-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          بخوێنەوە / داگر بکە
+        </div>
+      </a>
+
+      <!-- CARD 6 -->
+      <a href="سەرجەم_pdfـەکان_بەشی_شەشەم.pdf" target="_blank" class="pdf-card reveal">
+        <div class="pdf-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFB800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+        </div>
+        <span class="pdf-card-chapter">بەشی ٦</span>
+        <div class="pdf-card-title">بزووتنەوەی شەقامیزی</div>
+        <div class="pdf-card-meta">تێبینی + نموونەکان</div>
+        <div class="pdf-card-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          بخوێنەوە / داگر بکە
+        </div>
+      </a>
+
+      <!-- CARD 7 -->
+      <a href="pdf_بەشی_حەوتەم.pdf" target="_blank" class="pdf-card reveal">
+        <div class="pdf-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFB800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+        </div>
+        <span class="pdf-card-chapter">بەشی ٧</span>
+        <div class="pdf-card-title">فیزیای مۆدێرن</div>
+        <div class="pdf-card-meta">تێبینی + نموونەکان</div>
+        <div class="pdf-card-action">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          بخوێنەوە / داگر بکە
+        </div>
+      </a>
+
+    </div><!-- /pdf-grid -->
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section id="topics">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">مەوزووعەکان</span>
+      <h2 class="section-title">بابەتەکانی پۆلی ١٢</h2>
+      <p class="section-desc">هەموو بابەتەکانی مانگانەی ساڵی دوازدە.</p>
+    </div>
+
+    <div class="topics-grid">
+      <div class="topic-card reveal"><div class="topic-icon">⚡</div><span class="topic-name">کارەبای ستاتیکی</span></div>
+      <div class="topic-card reveal"><div class="topic-icon">🔋</div><span class="topic-name">دیجیتاڵی ئەمپیری</span></div>
+      <div class="topic-card reveal"><div class="topic-icon">🧲</div><span class="topic-name">میدانی ماگناتیسی</span></div>
+      <div class="topic-card reveal"><div class="topic-icon">💡</div><span class="topic-name">تیشکی نووری</span></div>
+      <div class="topic-card reveal"><div class="topic-icon">🌊</div><span class="topic-name">شەقامیزی</span></div>
+      <div class="topic-card reveal"><div class="topic-icon">⚛️</div><span class="topic-name">فیزیای ئاتۆمی</span></div>
+      <div class="topic-card reveal"><div class="topic-icon">🔭</div><span class="topic-name">ئۆپتیک</span></div>
+      <div class="topic-card reveal"><div class="topic-icon">🏃</div><span class="topic-name">دینامیک</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag" style="background:rgba(255,184,0,0.2);color:var(--yellow);">دەربارە</span>
+      <h2 class="section-title">بۆچی ئەم ماڵپەڕە دروستکرا؟</h2>
+      <p class="section-desc">ئامانجی ئاسانکردنی فێربوونی فیزیا بۆ خوێندکارانی پۆلی دوازدەیە.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>ئەم ماڵپەڕە دروستکراوە بۆ ئەوەی هەموو خوێندکارانی پۆلی دوازدە بتوانن بەئاسانی بەدەستی فایلەکانی دەرسی فیزیا بگەن، بۆ خۆرایی و بەبێ هیچ مەشقەیەک.</p>
+        <p>ماتریالەکانی ئێرە بە دەستی مامۆستا ئەژی دیاریکراون و تەرتیبکراون بۆ ئەوەی باشترین ئەنجامی تاقیکردنەوە بگرێتە بار.</p>
+      </div>
+      <div class="about-highlights reveal">
+        <div class="highlight-item"><div class="highlight-dot"></div><div class="highlight-text">خۆرایی تەواو — هیچ ئەکاونت پێویست نییە</div></div>
+        <div class="highlight-item"><div class="highlight-dot"></div><div class="highlight-text">PDF ەکان داگرکراون و ئۆنلاین بخوێنرێتەوە</div></div>
+        <div class="highlight-item"><div class="highlight-dot"></div><div class="highlight-text">دەستنیشانکردنی تەواوی هەموو بابەتەکان</div></div>
+        <div class="highlight-item"><div class="highlight-dot"></div><div class="highlight-text">نوێکردنەوەی بەردەوام لەگەڵ تاقیکردنەوەکان</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+      <ellipse cx="20" cy="20" rx="18" ry="7" stroke="#FFB800" stroke-width="2" fill="none"/>
+      <ellipse cx="20" cy="20" rx="18" ry="7" stroke="#FFB800" stroke-width="2" fill="none" transform="rotate(60 20 20)"/>
+      <ellipse cx="20" cy="20" rx="18" ry="7" stroke="#FFB800" stroke-width="2" fill="none" transform="rotate(120 20 20)"/>
+      <circle cx="20" cy="20" r="3.5" fill="#FFB800"/>
+    </svg>
+  </div>
+  <p class="footer-text">دروستکراوە بۆ خوێندکارانی پۆلی دوازدە &mdash; لەگەڵ <span>ئەژی</span></p>
+  
+  <div style="display:flex;justify-content:center;gap:24px;margin-top:20px;align-items:center;">
+    <a href="https://t.me/fizia_poli12" target="_blank" style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.85rem;transition:color 0.2s;" onmouseover="this.style.color='#FFB800'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M23.91 3.79L2.04 10.18c-.95.36-1.5.87-1.32 1.67.14.63.83 1.08 2.14 1.49l4.49 1.38c.41 4.74 2.23 8.53 5.39 11.48.48.43 1.24.67 2.0.67.86 0 1.62-.29 2.1-.79 1.38-1.38 2.28-4.23 2.77-8.28l5.87-2.9c1.36-.68 2.08-1.54 2.08-2.65 0-1.26-.82-2.09-2.65-2.86l-.01-.01zM8.47 14.48l-.27 3.72c-.05.58-.14 1.14-.36 1.62-1.06-1.03-1.92-2.65-2.39-4.8l2.98-.84c.02.13.03.26.04.3z"/>
+      </svg>
+      Telegram
+    </a>
+    <span style="color:rgba(255,255,255,0.3);">|</span>
+    <a href="https://youtube.com/@azhi_sangar?si=Q7sWFaQXAm0aKfWy" target="_blank" style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.85rem;transition:color 0.2s;" onmouseover="this.style.color='#FFB800'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      </svg>
+      YouTube
+    </a>
+  </div>
+</footer>
+
+<script>
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+
+  // ── COUNTER ANIMATION ──
+  const toArabicNumerals = n => n.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+  function animateCounter(el, target, suffix) {
+    let start = 0;
+    const step = () => {
+      start += Math.ceil(target / 30);
+      if (start >= target) { el.textContent = toArabicNumerals(target) + (suffix || ''); return; }
+      el.textContent = toArabicNumerals(start) + (suffix || '');
+      requestAnimationFrame(step);
+    };
+    step();
+  }
+
+  const statsObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      animateCounter(document.getElementById('counter-chapters'), 8, '');
+      animateCounter(document.getElementById('counter-pdfs'), 6, '');
+      statsObs.disconnect();
+    }
+  }, { threshold: 0.5 });
+  statsObs.observe(document.querySelector('.stats-bar'));
+</script>
+
+</body>
+</html>
